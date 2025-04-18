@@ -1,7 +1,8 @@
 import streamlit as st
 import re
+from typing import Tuple, List  # Import Tuple and List from typing
 
-# Custom CSS for styling
+# Custom CSS for dark mode styling
 st.markdown(
     """
     <style>
@@ -9,26 +10,27 @@ st.markdown(
 
     html, body, [class*="css"]  {
         font-family: 'Roboto', sans-serif;
-        background: #f0f4f8;
-        color: #333333;
+        background: #121212;  /* Dark background */
+        color: #E0E0E0;       /* Light text color */
     }
 
     .stApp {
+        max ```python
         max-width: 600px;
         margin: 2rem auto;
         padding: 2rem;
-        background: white;
+        background: #1E1E1E;  /* Darker card background */
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         transition: box-shadow 0.3s ease-in-out;
     }
 
     .stApp:hover {
-        box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+        box-shadow: 0 12px 36px rgba(0,0,0,0.7);
     }
 
     h1 {
-        color: #1f2937;
+        color: #FFFFFF;       /* White text for headings */
         font-weight: 700;
         font-size: 2.5rem;
         margin-bottom: 0.5rem;
@@ -36,6 +38,8 @@ st.markdown(
     }
 
     .stTextInput>div>div>input {
+        background: #2A2A2A;  /* Dark input background */
+        color: #E0E0E0;       /* Light text color */
         border: 2px solid #3b82f6;
         border-radius: 8px;
         padding: 0.75rem 1rem;
@@ -57,25 +61,25 @@ st.markdown(
     }
 
     .strength.Weak {
-        color: #ef4444;
+        color: #ef4444;  /* Red for weak */
     }
 
     .strength.Moderate {
-        color: #f59e0b;
+        color: #f59e0b;  /* Yellow for moderate */
     }
 
     .strength.Strong {
-        color: #10b981;
+        color: #10b981;  /* Green for strong */
     }
 
     .feedback {
         margin-top: 1rem;
-        background: #f9fafb;
+        background: #2A2A2A;  /* Dark feedback background */
         border-left: 4px solid #3b82f6;
         padding: 1rem 1.5rem;
         border-radius: 6px;
         font-size: 1rem;
-        color: #374151;
+        color: #E0E0E0;       /* Light text color */
         line-height: 1.5;
     }
 
@@ -91,7 +95,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-def password_strength(password: str) -> (str, list):
+def password_strength(password: str) -> Tuple[str, List[str]]:
     """
     Evaluate the strength of the given password and provide feedback.
 
